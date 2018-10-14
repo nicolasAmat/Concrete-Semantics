@@ -22,9 +22,9 @@ fun double :: "nat \<Rightarrow> nat" where
 "double 0 = 0" |
 "double (Suc m) = Suc (Suc (double m))"
 
-lemma add_01[simp]: "Suc (add m n) = add m (Suc n)"
+lemma add_01[simp]: "add m (Suc n) = Suc (add m n)"
   apply(induction m)
-  apply(auto)
+   apply(auto)
   done
         
 lemma add_02[simp]: "add m 0 = m"
@@ -32,9 +32,19 @@ lemma add_02[simp]: "add m 0 = m"
    apply(auto)
   done
 
-theorem add_com: "add m n = add n m"
+theorem add_commutative: "add m n = add n m"
   apply(induction m)
    apply(auto)
   done
- 
+
+theorem add_associative: "add x (add y z) = add (add x y) z"
+  apply(induction x)
+   apply(auto)
+  done
+
+theorem add_double: "double m = add m m"
+  apply(induction m)
+  apply(auto)
+  done
+
 end
