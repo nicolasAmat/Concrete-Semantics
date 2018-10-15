@@ -44,6 +44,22 @@ theorem add_associative: "add x (add y z) = add (add x y) z"
 
 theorem add_double: "double m = add m m"
   apply(induction m)
+   apply(auto)
+  done
+
+
+(* Exercise 2.3 *)
+
+fun app :: "'a list \<Rightarrow> 'a list \<Rightarrow> 'a list" where
+"app Nil ys = ys" |
+"app (Cons x xs) ys = Cons x (app xs ys)"
+
+fun count :: "'a \<Rightarrow> 'a list \<Rightarrow> nat" where
+"count x Nil = 0" |
+"count y (x # xs) = (if x = y then Suc(count y xs) else count y xs)"
+
+lemma count_inequality: "count x xs \<le> length xs"
+  apply(induction xs)
   apply(auto)
   done
 
