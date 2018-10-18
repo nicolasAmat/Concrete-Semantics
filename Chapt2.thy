@@ -42,7 +42,7 @@ lemma add_associative[simp]: "add x (add y z) = add (add x y) z"
    apply(auto)
   done
 
-theorem add_double: "double m = add m m"
+lemma add_double[simp]: "double m = add m m"
   apply(induction m)
    apply(auto)
   done
@@ -73,11 +73,10 @@ fun reverse :: "'a list \<Rightarrow> 'a list" where
 "reverse [] = []" |
 "reverse (x # xs) = snoc (reverse xs) x"
 
-lemma reverse_1[simp] : "reverse (snoc xs x) = x # reverse xs"
+lemma reverse_01[simp] : "reverse (snoc xs x) = x # reverse xs"
   apply(induction xs)
    apply(auto)
   done
-
 
 lemma double_reverse[simp] : "reverse(reverse xs) = xs"
   apply(induction xs)
@@ -85,7 +84,14 @@ lemma double_reverse[simp] : "reverse(reverse xs) = xs"
   done
 
 
-(* Exercice 2.5 *)
+(* Exercise 2.5 *)
+fun sum_opto :: "nat \<Rightarrow> nat" where
+"sum_opto 0 = 0" |
+"sum_opto (Suc n) = (sum_opto n) + (Suc n)"
 
+lemma formula_sum[simp] : "sum_opto n = n * (n + 1) div 2"
+  apply(induction n)
+   apply(auto)
+  done
 
 end
