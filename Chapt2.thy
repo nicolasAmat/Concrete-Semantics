@@ -32,12 +32,12 @@ lemma add_02[simp]: "add m 0 = m"
    apply(auto)
   done
 
-theorem add_commutative: "add m n = add n m"
+lemma add_commutative[simp]: "add m n = add n m"
   apply(induction m)
    apply(auto)
   done
 
-theorem add_associative: "add x (add y z) = add (add x y) z"
+lemma add_associative[simp]: "add x (add y z) = add (add x y) z"
   apply(induction x)
    apply(auto)
   done
@@ -58,9 +58,34 @@ fun count :: "'a \<Rightarrow> 'a list \<Rightarrow> nat" where
 "count x Nil = 0" |
 "count y (x # xs) = (if x = y then Suc(count y xs) else count y xs)"
 
-lemma count_inequality: "count x xs \<le> length xs"
+lemma count_inequality[simp]: "count x xs \<le> length xs"
   apply(induction xs)
   apply(auto)
   done
+
+
+(* Exercise 2.4 *)
+fun snoc :: "'a list \<Rightarrow> 'a \<Rightarrow> 'a list" where
+"snoc [] x = [x]" |
+"snoc (x # xs) y = x # (snoc xs y)"
+
+fun reverse :: "'a list \<Rightarrow> 'a list" where
+"reverse [] = []" |
+"reverse (x # xs) = snoc (reverse xs) x"
+
+lemma reverse_1[simp] : "reverse (snoc xs x) = x # reverse xs"
+  apply(induction xs)
+   apply(auto)
+  done
+
+
+lemma double_reverse[simp] : "reverse(reverse xs) = xs"
+  apply(induction xs)
+   apply(auto)
+  done
+
+
+(* Exercice 2.5 *)
+
 
 end
